@@ -1,12 +1,8 @@
 {
   "name": "stalk-market",
-  "version": "0.0.1",
   "description": "A stock market graphing app",
-  "main": "server.js",
-  "repository": "",
-  "author": "Herman Fassett",
-  "dependencies": {
-    "async": "~0.2.8",
-    "express": "~3.2.4",
+  "version": "0.0.1",
+  "engines": {
+    "node": "4.2.2"
   }
 }
