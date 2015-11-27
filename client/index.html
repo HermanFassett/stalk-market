@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" ng-app>
+  <head>
+    <title>Stalk Market</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <style>
+      body {
+        padding-top: 60px;
+      }
+    </style>
+    <script type="text/javascript" src="/js/index.js">
+      
+    </script>
+    <script type="text/javascript" src="/js/canvas.min.js"></script>
+  </head>
+  <body>
+    <div class="container" ng-controller="StocksCtrl">
+      <div class="navbar navbar-fixed-top navbar-inverse">
+        <div class="navbar-inner">
+          <div class="pull-left">
+            <a href="http://hermanfassett.me" class="navbar-brand">Herman Fassett</a>
+          </div>
+        </div>
+      </div>
+      <div class="page-header">
+        <h2>Stalk Market</h2>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          <div class="input-group">
+            <input ng-model="stockadd" type="text" class="form-control" aria-label="Input stock to add" placeholder="Stock name" maxlength="4">
+            <div class="input-group-btn">
+              <button ng-click="addStock(stockadd)" type="button" class="btn btn-default">Add</button>
+            </div>
+          </div>
+          <hr>
+          <ul class="nav nav-list well">
+            <div class="alert alert-warning alert-dismissible" ng-repeat="stock in stocks" role="alert">
+              <button type="button" class="close" aria-label="Close" ng-click="removeStock(stock)"><span aria-hidden="true">&times;</span></button>
+              <strong>{{stock}}</strong> stocks
+            </div>
+          </ul>
+        </div>
+        <div class="col-xs-9">
+          <div class="row">
+            <h1>Stocks: {{stocks.join(",")}}</h1>
+            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script>
+    </script>
+  </body>
+</html>
