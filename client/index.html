@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="stalkmarket">
   <head>
     <title>Stalk Market</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +10,8 @@
         padding-top: 60px;
       }
     </style>
-    <script type="text/javascript" src="/js/index.js">
-      
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular.min.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
     <script type="text/javascript" src="/js/canvas.min.js"></script>
   </head>
   <body>
@@ -30,10 +29,13 @@
       <div class="row">
         <div class="col-xs-3">
           <div class="input-group">
-            <input ng-model="stockadd" type="text" class="form-control" aria-label="Input stock to add" placeholder="Stock name" maxlength="4">
+            <input ng-model="stockadd" type="text" class="form-control" aria-label="Input stock to add" 
+                  placeholder="Stock name" maxlength="5" ng-keyup="change($event)" list="tickers">
             <div class="input-group-btn">
               <button ng-click="addStock(stockadd)" type="button" class="btn btn-default">Add</button>
             </div>
+            <datalist id="tickers">
+            </datalist>
           </div>
           <hr>
           <ul class="nav nav-list well">
@@ -52,7 +54,6 @@
     </div>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="/js/angular.min.js"></script>
     <script>
     </script>
   </body>

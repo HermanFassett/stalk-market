@@ -1,7 +1,9 @@
-function StocksCtrl($scope) {
+var app = angular.module("stalkmarket", []);
+app.controller("StocksCtrl", ["$scope", function($scope) {
     $scope.stocks = ["GOOG", "MSFT", "YHOO"];
+    $scope.ticks = ["Google", "Microsoft", "Yahoo"];
     $scope.addStock = function(stock) {
-        if (!$scope.stocks.join(".").match(new RegExp(stock, "gi"))) {
+        if (!$scope.stocks.join(".").match(new RegExp(stock + "(\\.|$)", "gi"))) {
             $scope.stocks.push(stock);
             localStorage["stalkmarketlist"] = JSON.stringify($scope.stocks);
             drawStocks($scope.stocks);
@@ -14,16 +16,38 @@ function StocksCtrl($scope) {
             drawStocks($scope.stocks);
         }
     };
+    $scope.change = function(e) {
+        var val = $(e.target).val().toUpperCase();
+        if (e.keyCode === 13) $scope.addStock(val);
+        else {
+            var url = "https://crossorigin.me/http://dev.markitondemand.com/MODApis/Api/v2/Lookup/jsonp?input=" + val + "&callback=t";
+            $.ajax({
+                url: url,
+                dataType: "text",
+                success: function(data, status, jqxhr) {
+                    $("#tickers").html("");
+                    var output = data.substr(2, data.length - 3);
+                    var parsed = $.parseJSON(output);
+                    parsed.forEach(function(symbol) {
+                        $("#tickers").append("<option value='" + symbol.Symbol + "'>" + symbol.Symbol + " - " + symbol.Name.substr(0, 20) + "</option>");
+                    });
+                },
+                error: function(jqxhr, status, error) {
+                    console.log(status + ", " + error);
+                }
+            });
+        }
+    };
     // When document first loads...
     try {
       var s = JSON.parse(localStorage["stalkmarketlist"]);
       if (s !== null && s.length) $scope.stocks = s;
     }
     catch (err) {
-        console.log(err)
+        console.log(err);
     }
     drawStocks($scope.stocks);
-}
+}]);
 function drawStocks(stocks) {
     var stockData = [];
     for (var i = 0; i < stocks.length; i++) {
