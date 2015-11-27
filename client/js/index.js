@@ -3,15 +3,25 @@ function StocksCtrl($scope) {
     $scope.addStock = function(stock) {
         if (!$scope.stocks.join(".").match(new RegExp(stock, "gi"))) {
             $scope.stocks.push(stock);
+            localStorage["stalkmarketlist"] = JSON.stringify($scope.stocks);
             drawStocks($scope.stocks);
         }
     };
     $scope.removeStock = function(stock) {
         if ($scope.stocks.indexOf(stock) > -1) {
             $scope.stocks.splice($scope.stocks.indexOf(stock), 1);
+            localStorage["stalkmarketlist"] = JSON.stringify($scope.stocks);
             drawStocks($scope.stocks);
         }
     };
+    // When document first loads...
+    try {
+      var s = JSON.parse(localStorage["stalkmarketlist"]);
+      if (s !== null && s.length) $scope.stocks = s;
+    }
+    catch (err) {
+        console.log(err)
+    }
     drawStocks($scope.stocks);
 }
 function drawStocks(stocks) {
