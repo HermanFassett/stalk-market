@@ -4,5 +4,8 @@
   "version": "0.0.1",
   "engines": {
     "node": "4.2.2"
+  },
+  "dependencies": {
+    "express": "4.x"
   }
 }
