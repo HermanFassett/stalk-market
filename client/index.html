@@ -15,7 +15,7 @@
     <script type="text/javascript" src="/js/canvas.min.js"></script>
   </head>
   <body>
-    <div class="container" ng-controller="StocksCtrl">
+    <div class="container responsive" ng-controller="StocksCtrl">
       <div class="navbar navbar-fixed-top navbar-inverse">
         <div class="navbar-inner">
           <div class="pull-left">
@@ -27,7 +27,7 @@
         <h2>Stalk Market</h2>
       </div>
       <div class="row">
-        <div class="col-xs-3">
+        <div class="col-md-3">
           <div class="input-group">
             <input ng-model="stockadd" type="text" class="form-control" aria-label="Input stock to add" 
                   placeholder="Stock name" maxlength="5" ng-keyup="change($event)" list="tickers">
@@ -45,7 +45,7 @@
             </div>
           </ul>
         </div>
-        <div class="col-xs-9">
+        <div class="col-md-9">
           <div class="row">
             <div id="chartContainer" style="height: auto; width: 100%;"></div>
           </div>
